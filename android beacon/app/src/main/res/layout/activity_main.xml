@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,88 +10,96 @@
         android:id="@+id/tv_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:text="Beacon"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061" />
+        android:textSize="36sp"/>
 
     <TextView
         android:id="@+id/UsrName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이름"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="152dp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="160dp"
+        android:text="이름" />
 
     <TextView
         android:id="@+id/Phon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전화번호"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="225dp" />
+        android:layout_below="@+id/UsrName"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="70dp"
+        android:text="전화번호" />
 
     <TextView
         android:id="@+id/Address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="주소(동까지만)"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="303dp" />
+        android:layout_below="@+id/Phon"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="75dp"
+        android:text="주소(동까지만)" />
 
     <TextView
         android:id="@+id/Vaccine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="75dp"
         android:text="백신 접종 여부"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="377dp" />
+        android:layout_below="@+id/Address"/>
 
     <EditText
         android:id="@+id/ed_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="145dp"
+        android:layout_toEndOf="@+id/UsrName"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text=""
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="141dp" />
+        android:text="" />
 
     <EditText
         android:id="@+id/ed_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_name"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/Phon"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text=""
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="212dp" />
+        android:text="" />
 
     <EditText
         android:id="@+id/ed_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_phone"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/Address"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text=""
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="287dp" />
+        android:text="" />
 
     <RadioGroup
+        android:id="@+id/rd_group"
         android:layout_width="264dp"
         android:layout_height="96dp"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="369dp">
+        android:layout_below="@+id/ed_address"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/Vaccine"
+        android:layout_marginStart="20dp">
 
         <RadioButton
             android:id="@+id/rd_noVaccin"
@@ -104,15 +112,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="백신 접종 완료(2차 백신 접종 후 14일 경과)" />
+
     </RadioGroup>
 
     <Button
         android:id="@+id/btn_commit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="COMMIT"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="296dp"
-        tools:layout_editor_absoluteY="561dp" />
+        android:layout_below="@+id/rd_group"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="51dp"
+        android:text="COMMIT" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
