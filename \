@@ -1,6 +1,5 @@
 from bluetooth import *
 import pymysql
-import time
 
 username = ''
 blank = 0
@@ -10,7 +9,13 @@ try:
     conn = pymysql.connect(host="localhost", user="root", password="pi1234", db="Mtemp", charset="utf8")
     curs = conn.cursor()
     while True:
-        time.sleep(1.5)
+        while blank == 0:
+            sql = "select temp from usertemp where temp is null"
+            curs.execute(sql)
+            rows = curs.fetchall()
+            print("noting")
+            if len(rows) > 0:
+                break
         sok.send("a") #아무 단어
         r = sok.recv(1024)
         temp = str(r)[-6:-1]
@@ -26,11 +31,11 @@ try:
         sql = "update usertemp set temp = %s where temp is null"
         print(float(temp))
         curs.execute(sql, (float(temp)))
-        conn.commit()
         
 except KeyboardInterrupt:
     print("\nterminate connection")
 finally:
     sok.close()
+    conn.commit()
     conn.close()
 
