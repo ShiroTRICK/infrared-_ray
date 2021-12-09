@@ -108,7 +108,7 @@
             android:text="백신 접종 미완료" />
 
         <RadioButton
-            android:id="@+id/rd_yseVaccin"
+            android:id="@+id/rd_yesVaccin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="백신 접종 완료(2차 백신 접종 후 14일 경과)" />

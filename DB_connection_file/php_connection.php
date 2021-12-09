@@ -1,5 +1,5 @@
 <?php
-$con=mysqli_connect("192.168.219.104","root","pi1234","tests");
+$con=mysqli_connect("192.168.219.104","root","pi1234","Mtemp");
 
 
 mysqli_set_charset($con,"utf8");

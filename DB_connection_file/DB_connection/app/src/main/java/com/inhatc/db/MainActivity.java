@@ -54,7 +54,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
         list = (ListView) findViewById(R.id.listView);
         personList = new ArrayList<HashMap<String, String>>();
         GetDataJSON g = new GetDataJSON();
+<<<<<<< Updated upstream
         g.execute("http:/192.168.219.104:8181/php_connection.php");
+=======
+        g.execute("http:/192.168.219.100:8181/php_connection.php");
+>>>>>>> Stashed changes
         insertid = (EditText) findViewById(R.id.insertid);
         insertpw = (EditText) findViewById(R.id.insertpw);
         insertbtn = (Button) findViewById(R.id.insertbtn);
@@ -71,14 +75,22 @@ public class MainActivity extends Activity implements View.OnClickListener{
             String username = insertid.getText().toString();
             String pw = insertpw.getText().toString();
             insertData i = new insertData();
+<<<<<<< Updated upstream
             i.execute("http:/192.168.219.104:8181/insert.php",username,pw);
+=======
+            i.execute("http:/192.168.219.100:8181/insert.php",username,pw);
+>>>>>>> Stashed changes
             insertid.setText("");
             insertpw.setText("");
         }
         else if(arg == searchbtn){
             String username = searchtxt.getText().toString();
             searchData s = new searchData();
+<<<<<<< Updated upstream
             s.execute("http:/192.168.219.104:8181/select.php",username);
+=======
+            s.execute("http:/192.168.219.100:8181/select.php",username);
+>>>>>>> Stashed changes
         }
     }
 
@@ -86,11 +98,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
         try {
             JSONObject jsonObj = new JSONObject(myJSON);
             peoples = jsonObj.getJSONArray(TAG_RESULTS);
-
+            Log.d("main",peoples.length() +"되나" );
             for (int i = 0; i < peoples.length(); i++) {
                 JSONObject c = peoples.getJSONObject(i);
                 String id = c.getString(TAG_ID);
                 String name = c.getString(TAG_NAME);
+<<<<<<< Updated upstream
+=======
+                if (id != null){
+                    Log.d("main","안되는거임"+id);
+                }
+                else{
+                    Log.d("main","되는거임"+id);
+                }
+>>>>>>> Stashed changes
                 HashMap<String, String> persons = new HashMap<String, String>();
                 persons.put(TAG_ID, id);
                 persons.put(TAG_NAME, name);
@@ -130,6 +151,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 }
                 bufferedReader.close();
                 return sb.toString().trim();
+<<<<<<< Updated upstream
 
             } catch (Exception e) {
                 return null;
@@ -169,6 +191,167 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 outputStream.close();
 
 
+=======
+
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            myJSON = result;
+            showList();
+        }
+    }
+
+
+//    class searchData extends AsyncTask<String, Void, String>{
+//        @Override
+//        protected String doInBackground(String... params) {
+//            String username = (String) params[1];
+//
+//            String uri = params[0];
+//            String postparam = "username=" + username;
+//            BufferedReader bufferedReader = null;
+//
+//            try {
+//                URL url = new URL(uri);
+//                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//                con.setReadTimeout(5000);
+//                con.setConnectTimeout(5000);
+//                con.setRequestMethod("POST");
+//                con.setDoInput(true);
+//                con.connect();
+//
+//
+//                OutputStream outputStream = con.getOutputStream();
+//                outputStream.write(postparam.getBytes("UTF-8"));
+//                outputStream.flush();
+//                outputStream.close();
+//
+//
+//                int responseStatusCode = con.getResponseCode();
+//                Log.i(TAG, "response code - " + responseStatusCode);
+//
+//                InputStream inputStream;
+//                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+//                    inputStream = con.getInputStream();
+//                } else {
+//                    inputStream = con.getErrorStream();
+//                }
+//
+//                StringBuilder sb = new StringBuilder();
+//
+//                bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+//
+//                String json;
+//                while ((json = bufferedReader.readLine()) != null) {
+//                    sb.append(json + "\n");
+//                }
+//                bufferedReader.close();
+//                return sb.toString().trim();
+//            } catch (Exception e) {
+//                return null;
+//            }
+//        }
+//        @Override
+//        protected void onPostExecute(String result){ //아직 미작동
+//            try{// 있는지 확인 용도
+//                JSONObject jsonObj = new JSONObject(myJSON);
+//                peoples = jsonObj.getJSONArray(TAG_RESULTS);
+////                if(peoples.length() == 0){
+////                    resultview.setText("no");
+////                }
+////                else{
+////                    resultview.setText("yes");
+////                }
+//            }catch (Exception e){
+//
+//            }
+//        }
+//    }
+class searchData extends AsyncTask<String, Void, String> {
+    @Override
+    protected String doInBackground(String... params) {
+        String phone = (String) params[1];
+
+        String uri = params[0];
+        String postparam = "phone=" + phone;
+        BufferedReader bufferedReader = null;
+
+        try {
+            URL url = new URL(uri);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setReadTimeout(5000);
+            con.setConnectTimeout(5000);
+            con.setRequestMethod("POST");
+            con.setDoInput(true);
+            con.connect();
+
+            OutputStream outputStream = con.getOutputStream();
+            outputStream.write(postparam.getBytes("UTF-8"));
+            outputStream.flush();
+            outputStream.close();
+
+
+            int responseStatusCode = con.getResponseCode();
+
+            InputStream inputStream;
+            if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                inputStream = con.getInputStream();
+            } else {
+                inputStream = con.getErrorStream();
+            }
+            StringBuilder sb = new StringBuilder();
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+            String json;
+            while ((json = bufferedReader.readLine()) != null) {
+                sb.append(json + "\n");
+            }
+            bufferedReader.close();
+            Log.d("d",sb.toString().trim());
+            return sb.toString().trim();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    @Override
+    protected void onPostExecute(String result){
+        myJSON = result;
+        showList();
+    }
+}
+
+
+    class insertData extends AsyncTask<String, Void, String>{
+        @Override
+        protected String doInBackground(String... params) {
+            String username = (String) params[1];
+            String pw = (String) params[2];
+
+            String uri = params[0];
+            String postparam = "username=" + username + "&pw=" + pw;
+            BufferedReader bufferedReader = null;
+
+            try {
+                URL url = new URL(uri);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setReadTimeout(5000);
+                con.setConnectTimeout(5000);
+                con.setRequestMethod("POST");
+                con.setDoInput(true);
+                con.connect();
+
+
+                OutputStream outputStream = con.getOutputStream();
+                outputStream.write(postparam.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+>>>>>>> Stashed changes
                 int responseStatusCode = con.getResponseCode();
                 Log.i(TAG, "response code - " + responseStatusCode);
 
@@ -180,6 +363,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 }
 
                 StringBuilder sb = new StringBuilder();
+<<<<<<< Updated upstream
 
                 bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
@@ -266,4 +450,24 @@ public class MainActivity extends Activity implements View.OnClickListener{
             Log.d(TAG, "post");
         }
     }
+=======
+
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+                String json;
+                while ((json = bufferedReader.readLine()) != null) {
+                    sb.append(json + "\n");
+                }
+                bufferedReader.close();
+                return sb.toString().trim();
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        @Override
+        protected void onPostExecute(String result){
+            Log.d(TAG, "post");
+        }
+    }
+>>>>>>> Stashed changes
     }
