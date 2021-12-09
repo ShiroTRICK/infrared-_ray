@@ -9,5 +9,42 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="467dp" />
+
+    <EditText
+        android:id="@+id/insertid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="true"/>
+
+    <EditText
+        android:id="@+id/insertpw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="true"/>
+
+    <Button
+        android:id="@+id/insertbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="insert"
+        />
+
+    <EditText
+        android:id="@+id/searchtxt"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:enabled="true"/>
+
+    <Button
+        android:id="@+id/searchbtn"
+        android:text="check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/result"
+        android:text="result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
 </LinearLayout>
